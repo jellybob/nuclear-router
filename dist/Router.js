@@ -73,27 +73,12 @@ var Router = (function () {
 
     this.__currentCanonicalPath = null;
 
-    _WindowEnv2['default'].addEventListener('popstate', function () {
-      var loaded = false;
-      if (_DocumentEnv2['default'].getReadyState() === 'complete') {
-        loaded = true;
+    _WindowEnv2['default'].addEventListener('popstate', function (e) {
+      if (e.state) {
+        _this.replace(e.state.canonicalPath);
       } else {
-        _WindowEnv2['default'].addEventListener('load', function () {
-          setTimeout(function () {
-            loaded = true;
-          }, 0);
-        });
+        _this.go(_this.getCanonicalPath());
       }
-      return function (e) {
-        if (!loaded) {
-          return;
-        }
-        if (e.state) {
-          _this.replace(e.state.canonicalPath);
-        } else {
-          _this.go(_this.getCanonicalPath());
-        }
-      };
     });
   }
 

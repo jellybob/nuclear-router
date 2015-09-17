@@ -37,26 +37,11 @@ export default class Router {
 
     this.__currentCanonicalPath = null
 
-    WindowEnv.addEventListener('popstate', (() => {
-      var loaded = false
-      if (DocumentEnv.getReadyState() === 'complete') {
-        loaded = true
+    WindowEnv.addEventListener('popstate', ((e) => {
+      if (e.state) {
+        this.replace(e.state.canonicalPath)
       } else {
-        WindowEnv.addEventListener('load', () => {
-          setTimeout(() => {
-            loaded = true
-          }, 0)
-        })
-      }
-      return (e) => {
-        if (!loaded) {
-          return
-        }
-        if (e.state) {
-          this.replace(e.state.canonicalPath)
-        } else {
-          this.go(this.getCanonicalPath())
-        }
+        this.go(this.getCanonicalPath())
       }
     }))
   }
