@@ -7,7 +7,12 @@ function getTitle() {
   return document.title;
 }
 
+function getReadyState() {
+  return document.getReadyState;
+}
+
 exports["default"] = {
-  getTitle: getTitle
+  getTitle: getTitle,
+  getReadyState: getReadyState
 };
 module.exports = exports["default"];
