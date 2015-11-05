@@ -58,8 +58,6 @@ var _DocumentEnv2 = _interopRequireDefault(_DocumentEnv);
 
 var Router = (function () {
   function Router(opts) {
-    var _this = this;
-
     _classCallCheck(this, Router);
 
     this.opts = (0, _objectAssign2['default'])({
@@ -72,14 +70,6 @@ var Router = (function () {
     this.__routes = [];
 
     this.__currentCanonicalPath = null;
-
-    _WindowEnv2['default'].addEventListener('popstate', function (e) {
-      if (e.state) {
-        _this.replace(e.state.canonicalPath);
-      } else {
-        _this.go(_this.getCanonicalPath());
-      }
-    });
   }
 
   /**
@@ -105,13 +95,13 @@ var Router = (function () {
   _createClass(Router, [{
     key: 'registerRoutes',
     value: function registerRoutes(routes) {
-      var _this2 = this;
+      var _this = this;
 
       if (!Array.isArray(routes)) {
         throw new Error('Router#registerRoutes must be passed an array of Routes');
       }
       routes.map(function (route) {
-        _this2.__routes.push(new _Route2['default'](route));
+        _this.__routes.push(new _Route2['default'](route));
       });
     }
 

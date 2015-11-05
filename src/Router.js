@@ -36,14 +36,6 @@ export default class Router {
     this.__routes = []
 
     this.__currentCanonicalPath = null
-
-    WindowEnv.addEventListener('popstate', ((e) => {
-      if (e.state) {
-        this.replace(e.state.canonicalPath)
-      } else {
-        this.go(this.getCanonicalPath())
-      }
-    }))
   }
 
   /**
